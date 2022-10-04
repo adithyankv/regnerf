@@ -1,0 +1,9 @@
+# ignore compiled bytecode files
+__pycache__
+*.pyc
+
+# ignore virtual environment
+.venv
+
+# ignore training data
+data
