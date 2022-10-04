@@ -29,8 +29,8 @@ gin.add_config_file_search_path('../')
 gin.config.external_configurable(jnp.reciprocal, module='jnp')
 gin.config.external_configurable(jnp.log, module='jnp')
 gin.config.external_configurable(jnp.sqrt, module='jnp')
-gin.config.external_configurable(flax.nn.relu, module='flax.nn')
-gin.config.external_configurable(flax.nn.softplus, module='flax.nn')
+gin.config.external_configurable(flax.linen.relu, module='flax.linen')
+gin.config.external_configurable(flax.linen.softplus, module='flax.linen')
 gin.config.external_configurable(
     jax.nn.initializers.glorot_uniform(),
     module='jax.nn.initializers.glorot_uniform')

@@ -1,9 +1,16 @@
 gin-config==0.5.0
-absl-py==0.15.0
-flax==0.3.5
-tensorflow==2.6.2
-opencv-python==4.5.5.62
-oryx==0.2.1
-jax==0.2.16
-scikit-image==0.17.2
-dm-pix==0.3.0
+absl-py==1.2.0
+flax==0.5.1
+tensorflow==2.10.0
+opencv-python==4.6.0.66
+oryx==0.2.3
+jax==0.3.15
+scikit-image==0.19.3
+dm-pix==0.3.4
+PyYAML==6.0
+
+# install from repo for gpu support. follows instructions from
+# https://github.com/google/jax. Can remove this line and manually 
+# install the appropriate version for cuda as supported by relevant device
+--find-links https://storage.googleapis.com/jax-releases/jax_cuda_releases.html 
+jaxlib==0.3.15+cuda11.cudnn82
