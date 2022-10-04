@@ -298,7 +298,7 @@ def render_image(render_fn, rays, rng, config):
   num_rays = height * width
   rays = jax.tree_map(lambda r: r.reshape((num_rays, -1)), rays)
 
-  host_id = jax.host_id()
+  process_index = jax.process_index()
   chunks = []
   idx0s = range(0, num_rays, config.render_chunk_size)
   for i_chunk, idx0 in enumerate(idx0s):
@@ -315,9 +315,9 @@ def render_image(render_fn, rays, rng, config):
           lambda r: jnp.pad(r, ((0, padding), (0, 0)), mode='edge'), chunk_rays)
     else:
       padding = 0
-    # After padding the number of chunk_rays is always divisible by host_count.
-    rays_per_host = chunk_rays.origins.shape[0] // jax.host_count()
-    start, stop = host_id * rays_per_host, (host_id + 1) * rays_per_host
+    # After padding the number of chunk_rays is always divisible by process_count.
+    rays_per_host = chunk_rays.origins.shape[0] // jax.process_count()
+    start, stop = process_index * rays_per_host, (process_index + 1) * rays_per_host
     chunk_rays = jax.tree_map(lambda r: utils.shard(r[start:stop]), chunk_rays)
     chunk_renderings = render_fn(rng, chunk_rays)
 
